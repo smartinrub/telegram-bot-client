@@ -10,7 +10,7 @@ import com.sergiomartinrubio.model.ResponseMessage;
  *
  * @author Sergio Martin Rubio
  */
-public class TelegramBotClientImpl implements TelegramBotClient {
+class TelegramBotClientImpl implements TelegramBotClient {
 
     private final ClientHttpRequest clientHttpRequest;
 
