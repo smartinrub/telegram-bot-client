@@ -1,6 +1,7 @@
 package com.sergiomartinrubio.client;
 
 import com.sergiomartinrubio.model.Chat;
+import com.sergiomartinrubio.model.ChatType;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.User;
 
@@ -20,6 +21,8 @@ public class TelegramBotClient {
 
     public Message sendMessage(String chatId, String message) {
 
-        return new Message(9, new User(), new Chat(), 1626859986L, "any text");
+        User from = new User(1881024015L, true, "java", "cool_java_bot");
+        Chat chat = new Chat(-489903905L, "Java", ChatType.GROUP, true);
+        return new Message(9, from, chat, 1626859986L, "any text");
     }
 }
