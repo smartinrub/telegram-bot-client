@@ -1,28 +1,19 @@
 package com.sergiomartinrubio.client;
 
-import com.sergiomartinrubio.model.Chat;
-import com.sergiomartinrubio.model.ChatType;
-import com.sergiomartinrubio.model.Message;
-import com.sergiomartinrubio.model.User;
+import com.sergiomartinrubio.model.ResponseMessage;
 
 /**
  * Client for interacting with Telegram Bots.
  *
  * @author Sergio Martin Rubio
  */
-public class TelegramBotClient {
+public interface TelegramBotClient {
 
-    private final String botToken;
-
-    public TelegramBotClient(String botToken) {
-        this.botToken = botToken;
-    }
-
-
-    public Message sendMessage(String chatId, String message) {
-
-        User from = new User(1881024015L, true, "java", "cool_java_bot");
-        Chat chat = new Chat(-489903905L, "Java", ChatType.GROUP, true);
-        return new Message(9, from, chat, 1626859986L, "any text");
-    }
+    /**
+     * Sends a message to a particular chat
+     * @param chatId the target chat for the bot message
+     * @param message the message as {@link String}
+     * @return message response if successful
+     */
+    ResponseMessage sendMessage(long chatId, String message);
 }
