@@ -1,12 +1,19 @@
 package com.sergiomartinrubio.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class Chat {
-    private final long id;
-    private final String title;
-    private final ChatType type;
-    private final boolean allowMembersAreAdministrators;
+    private long id;
+    private String title;
+    private ChatType type;
+
+    @JsonProperty("all_members_are_administrators")
+    private boolean allowMembersAreAdministrators;
+
+    public Chat() {
+    }
 
     public Chat(long id, String title, ChatType type, boolean allowMembersAreAdministrators) {
         this.id = id;

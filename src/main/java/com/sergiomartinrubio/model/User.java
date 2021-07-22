@@ -1,12 +1,22 @@
 package com.sergiomartinrubio.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class User {
-    private final long id;
-    private final boolean isBot;
-    private final String firstName;
-    private final String username;
+    private long id;
+
+    @JsonProperty("is_bot")
+    private boolean isBot;
+
+    @JsonProperty("first_name")
+    private String firstName;
+
+    private String username;
+
+    public User() {
+    }
 
     public User(long id, boolean isBot, String firstName, String username) {
         this.id = id;
