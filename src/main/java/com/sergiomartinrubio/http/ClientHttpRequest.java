@@ -6,8 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.http.model.RequestBody;
-import com.sergiomartinrubio.model.ResponseMessage;
-import com.sergiomartinrubio.model.ResponseMessageWrapper;
+import com.sergiomartinrubio.model.Response;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,6 +15,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ClientHttpRequest {
+    private static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     private final HttpClient httpClient;
     private final String baseUrl;
@@ -25,29 +26,33 @@ public class ClientHttpRequest {
         this.baseUrl = baseUrl;
     }
 
-    public ResponseMessage doExecute(String path, HttpMethod method, RequestBody requestBody) {
+    public Response execute(String path, HttpMethod method, RequestBody requestBody) {
+        String jsonRequestBody = buildJsonRequestBody(requestBody);
+        HttpRequest request = buildHttpRequest(path, method, jsonRequestBody);
+
+        try {
+            HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            return mapper.readValue(httpResponse.body(), Response.class);
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private HttpRequest buildHttpRequest(String path, HttpMethod method, String jsonRequestBody) {
+        return HttpRequest.newBuilder(URI.create(baseUrl + path))
+                .header("Content-Type", APPLICATION_JSON_MEDIA_TYPE)
+                .method(method.name(), HttpRequest.BodyPublishers.ofString(jsonRequestBody))
+                .build();
+    }
+
+    private String buildJsonRequestBody(RequestBody requestBody) {
         SimpleModule module = new SimpleModule();
         module.addSerializer(new BotMessageSerializer(BotMessage.class));
 
-        ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(module);
-        String jsonRequestBody;
         try {
-            jsonRequestBody = mapper.writeValueAsString(requestBody);
+            return mapper.writeValueAsString(requestBody);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        HttpRequest request = HttpRequest.newBuilder(URI.create(baseUrl + path))
-                .header("Content-Type", "application/json")
-                .method(method.name(), HttpRequest.BodyPublishers.ofString(jsonRequestBody))
-                .build();
-
-        try {
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper deserializerMapper = new ObjectMapper();
-            ResponseMessageWrapper responseMessageWrapper = deserializerMapper.readValue(response.body(), ResponseMessageWrapper.class);
-            return responseMessageWrapper.getResult();
-        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -1,6 +1,6 @@
 package com.sergiomartinrubio.client;
 
-import com.sergiomartinrubio.model.ResponseMessage;
+import com.sergiomartinrubio.model.Response;
 
 /**
  * Client for interacting with Telegram Bots.
@@ -19,5 +19,5 @@ public interface TelegramBotClient {
      * @param message the message as {@link String}
      * @return message response if successful
      */
-    ResponseMessage sendMessage(long chatId, String message);
+    Response sendMessage(long chatId, String message);
 }

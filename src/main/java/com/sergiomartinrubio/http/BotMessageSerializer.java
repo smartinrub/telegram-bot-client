@@ -13,7 +13,8 @@ public class BotMessageSerializer extends StdSerializer<BotMessage> {
     }
 
     @Override
-    public void serialize(BotMessage botMessage, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(BotMessage botMessage, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            throws IOException {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeNumberField("chat_id", botMessage.getChatId());
         jsonGenerator.writeStringField("text", String.valueOf(botMessage.getText()));

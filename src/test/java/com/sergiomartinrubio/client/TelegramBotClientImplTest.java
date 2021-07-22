@@ -5,7 +5,9 @@ import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.model.Chat;
 import com.sergiomartinrubio.model.ChatType;
-import com.sergiomartinrubio.model.ResponseMessage;
+import com.sergiomartinrubio.model.Message;
+import com.sergiomartinrubio.model.Response;
+import com.sergiomartinrubio.model.Result;
 import com.sergiomartinrubio.model.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,16 +40,18 @@ class TelegramBotClientImplTest {
         HttpMethod method = HttpMethod.POST;
         User from = new User(USER_ID, true, "java", "cool_java_bot");
         Chat chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
-        var firstResponseMessage = new ResponseMessage(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
-        var secondResponseMessage = new ResponseMessage(SECOND_MESSAGE_ID, from, chat, 1626859987L, SECOND_MESSAGE);
+        var firstMessageResult = new Result(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
+        var secondMessageResult = new Result(SECOND_MESSAGE_ID, from, chat, 1626859987L, SECOND_MESSAGE);
+        var firstResponseMessage = new Message(firstMessageResult);
+        var secondResponseMessage = new Message(secondMessageResult);
         var firstMessage = new BotMessage(CHAT_ID, FIRST_MESSAGE);
         var secondMessage = new BotMessage(CHAT_ID, SECOND_MESSAGE);
-        when(clientHttpRequest.doExecute(path, method, firstMessage)).thenReturn(firstResponseMessage);
-        when(clientHttpRequest.doExecute(path, method, secondMessage)).thenReturn(secondResponseMessage);
+        when(clientHttpRequest.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
+        when(clientHttpRequest.execute(path, method, secondMessage)).thenReturn(secondResponseMessage);
 
         // WHEN
-        ResponseMessage firstResponse = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);
-        ResponseMessage secondResponse = telegramBotClientImpl.sendMessage(CHAT_ID, SECOND_MESSAGE);
+        Response firstResponse = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);
+        Response secondResponse = telegramBotClientImpl.sendMessage(CHAT_ID, SECOND_MESSAGE);
 
         // THEN
         assertThat(firstResponse).isEqualTo(firstResponseMessage);

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class ResponseMessage {
+public class Result {
 
     @JsonProperty("message_id")
     private long messageId;
@@ -18,10 +18,10 @@ public class ResponseMessage {
 
     private String text;
 
-    public ResponseMessage() {
+    public Result() {
     }
 
-    public ResponseMessage(long messageId, User from, Chat chat, long date, String text) {
+    public Result(long messageId, User from, Chat chat, long date, String text) {
         this.messageId = messageId;
         this.from = from;
         this.chat = chat;
@@ -53,8 +53,8 @@ public class ResponseMessage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ResponseMessage responseMessage1 = (ResponseMessage) o;
-        return messageId == responseMessage1.messageId && date == responseMessage1.date && Objects.equals(from, responseMessage1.from) && Objects.equals(chat, responseMessage1.chat) && Objects.equals(text, responseMessage1.text);
+        Result message1 = (Result) o;
+        return messageId == message1.messageId && date == message1.date && Objects.equals(from, message1.from) && Objects.equals(chat, message1.chat) && Objects.equals(text, message1.text);
     }
 
     @Override
