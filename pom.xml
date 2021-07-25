@@ -23,7 +23,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/smartinrub</url>
+    <url>https://github.com/smartinrub/telegram-bot-client</url>
+    <connection>scm:git:git://github.com/smartinrub/telegram-bot-client.git</connection>
+    <developerConnection>scm:git:git@github.com:smartinrub/telegram-bot-client.git</developerConnection>
   </scm>
 
   <developers>
