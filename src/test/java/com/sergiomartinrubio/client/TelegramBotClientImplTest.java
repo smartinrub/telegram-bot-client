@@ -5,6 +5,7 @@ import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.model.Chat;
 import com.sergiomartinrubio.model.ChatType;
+import com.sergiomartinrubio.model.ErrorResponse;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
 import com.sergiomartinrubio.model.Result;
@@ -16,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +31,9 @@ class TelegramBotClientImplTest {
 
     @InjectMocks
     private TelegramBotClientImpl telegramBotClientImpl;
+
+    @Mock
+    private ErrorResponseHandler errorResponseHandler;
 
     @Mock
     private ClientHttpRequest clientHttpRequest;
@@ -56,6 +61,22 @@ class TelegramBotClientImplTest {
         // THEN
         assertThat(firstResponse).isEqualTo(firstResponseMessage);
         assertThat(secondResponse).isEqualTo(secondResponseMessage);
+    }
+
+    @Test
+    void shouldCallResponseErrorHandlerWhenErrorResponse() {
+        // GIVEN
+        String path = "/sendMessage";
+        HttpMethod method = HttpMethod.POST;
+        var firstResponseMessage = new ErrorResponse();
+        var firstMessage = new BotMessage(CHAT_ID, FIRST_MESSAGE);
+        when(clientHttpRequest.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
+
+        // WHEN
+        Response firstResponse = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);
+
+        // THEN
+        verify(errorResponseHandler).handle(firstResponse, path);
     }
 
 }

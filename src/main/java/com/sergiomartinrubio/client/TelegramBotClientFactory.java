@@ -23,6 +23,9 @@ public class TelegramBotClientFactory {
      * @return the {@link TelegramBotClient}
      */
     public static TelegramBotClient createClient(String botToken) {
-        return new TelegramBotClientImpl(new ClientHttpRequest(HttpClient.newHttpClient(), BASE_URL + botToken));
+        return new TelegramBotClientImpl(
+                new ClientHttpRequest(HttpClient.newHttpClient(), BASE_URL + botToken),
+                new ErrorResponseHandler()
+        );
     }
 }

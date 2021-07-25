@@ -32,6 +32,8 @@ public class ClientHttpRequest {
 
         try {
             HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            // TODO: Handle different types of error response like 401, 400 or 404. Map to exceptions.
+            //  i.e. InvalidRequestException, AuthenticationException, TelegramException (Display a very generic error to the user)
             return mapper.readValue(httpResponse.body(), Response.class);
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

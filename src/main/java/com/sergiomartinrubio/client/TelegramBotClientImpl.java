@@ -2,19 +2,28 @@ package com.sergiomartinrubio.client;
 
 import com.sergiomartinrubio.http.ClientHttpRequest;
 import com.sergiomartinrubio.http.model.BotMessage;
-import com.sergiomartinrubio.http.model.HttpMethod;
+import com.sergiomartinrubio.model.ErrorResponse;
 import com.sergiomartinrubio.model.Response;
+
+import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 
 class TelegramBotClientImpl implements TelegramBotClient {
 
     private final ClientHttpRequest clientHttpRequest;
+    private final ErrorResponseHandler errorResponseHandler;
 
-    TelegramBotClientImpl(ClientHttpRequest clientHttpRequest) {
+    TelegramBotClientImpl(ClientHttpRequest clientHttpRequest, ErrorResponseHandler errorResponseHandler) {
         this.clientHttpRequest = clientHttpRequest;
+        this.errorResponseHandler = errorResponseHandler;
     }
 
     @Override
     public Response sendMessage(long chatId, String message) {
-        return clientHttpRequest.execute("/sendMessage", HttpMethod.POST, new BotMessage(chatId, message));
+        String path = "/sendMessage";
+        Response response = clientHttpRequest.execute(path, POST, new BotMessage(chatId, message));
+        if (response instanceof ErrorResponse) {
+            errorResponseHandler.handle(response, path);
+        }
+        return response;
     }
 }
