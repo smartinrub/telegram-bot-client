@@ -7,6 +7,7 @@ import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.http.model.RequestBody;
 import com.sergiomartinrubio.model.Response;
+import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.net.URI;
@@ -14,17 +15,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@RequiredArgsConstructor
 public class ClientHttpRequest {
     private static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     private final HttpClient httpClient;
     private final String baseUrl;
-
-    public ClientHttpRequest(HttpClient httpClient, String baseUrl) {
-        this.httpClient = httpClient;
-        this.baseUrl = baseUrl;
-    }
 
     public Response execute(String path, HttpMethod method, RequestBody requestBody) {
         String jsonRequestBody = buildJsonRequestBody(requestBody);

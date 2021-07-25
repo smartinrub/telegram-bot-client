@@ -4,18 +4,15 @@ import com.sergiomartinrubio.http.ClientHttpRequest;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.model.ErrorResponse;
 import com.sergiomartinrubio.model.Response;
+import lombok.RequiredArgsConstructor;
 
 import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 
+@RequiredArgsConstructor
 class TelegramBotClientImpl implements TelegramBotClient {
 
     private final ClientHttpRequest clientHttpRequest;
     private final ErrorResponseHandler errorResponseHandler;
-
-    TelegramBotClientImpl(ClientHttpRequest clientHttpRequest, ErrorResponseHandler errorResponseHandler) {
-        this.clientHttpRequest = clientHttpRequest;
-        this.errorResponseHandler = errorResponseHandler;
-    }
 
     @Override
     public Response sendMessage(long chatId, String message) {
