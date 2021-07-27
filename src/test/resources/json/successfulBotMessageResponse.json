@@ -1,0 +1,20 @@
+{
+  "ok":true,
+  "result":{
+    "message_id":9,
+    "from":{
+      "id":1881024015,
+      "is_bot":true,
+      "first_name":"java",
+      "username":"cool_java_bot"
+    },
+    "chat":{
+      "id":-489903905,
+      "title":"Java",
+      "type":"group",
+      "all_members_are_administrators":true
+    },
+    "date":1626859986,
+    "text":"first message"
+  }
+}
