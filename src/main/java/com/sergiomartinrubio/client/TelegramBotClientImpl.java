@@ -11,13 +11,13 @@ import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 @RequiredArgsConstructor
 class TelegramBotClientImpl implements TelegramBotClient {
 
-    private final ClientHttpRequest clientHttpRequest;
+    private final ClientHttpRequest clientHttpRequestImpl;
     private final ErrorResponseHandler errorResponseHandler;
 
     @Override
     public Response sendMessage(long chatId, String message) {
         String path = "/sendMessage";
-        Response response = clientHttpRequest.execute(path, POST, new BotMessage(chatId, message));
+        Response response = clientHttpRequestImpl.execute(path, POST, new BotMessage(chatId, message));
         if (response instanceof ErrorResponse) {
             errorResponseHandler.handle(response, path);
         }

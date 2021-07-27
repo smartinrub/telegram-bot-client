@@ -1,9 +1,7 @@
 package com.sergiomartinrubio.client;
 
-import com.sergiomartinrubio.http.ClientHttpRequest;
+import com.sergiomartinrubio.http.ClientHttpRequestFactory;
 import lombok.NoArgsConstructor;
-
-import java.net.http.HttpClient;
 
 /**
  * Factory class to create {@link TelegramBotClientImpl}
@@ -13,8 +11,6 @@ import java.net.http.HttpClient;
 @NoArgsConstructor
 public class TelegramBotClientFactory {
 
-    private static final String BASE_URL = "https://api.telegram.org/bot";
-
     /**
      * Creates {@link TelegramBotClientImpl} given a Telegram Bot Token
      *
@@ -22,9 +18,6 @@ public class TelegramBotClientFactory {
      * @return the {@link TelegramBotClient}
      */
     public static TelegramBotClient createClient(String botToken) {
-        return new TelegramBotClientImpl(
-                new ClientHttpRequest(HttpClient.newHttpClient(), BASE_URL + botToken),
-                new ErrorResponseHandler()
-        );
+        return new TelegramBotClientImpl(ClientHttpRequestFactory.create(botToken), new ErrorResponseHandler());
     }
 }

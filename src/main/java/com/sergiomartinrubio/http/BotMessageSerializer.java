@@ -8,7 +8,7 @@ import com.sergiomartinrubio.http.model.BotMessage;
 import java.io.IOException;
 
 public class BotMessageSerializer extends StdSerializer<BotMessage> {
-    protected BotMessageSerializer(Class<BotMessage> t) {
+    public BotMessageSerializer(Class<BotMessage> t) {
         super(t);
     }
 

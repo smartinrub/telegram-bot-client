@@ -1,42 +1,26 @@
 package com.sergiomartinrubio.http.model;
 
-import java.util.Objects;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.sergiomartinrubio.http.BotMessageSerializer;
+import lombok.Value;
 
-public class BotMessage extends RequestBody {
-    private final long chatId;
-    private final String text;
+@Value
+public class BotMessage {
+    long chatId;
+    String text;
 
-    public BotMessage(long chatId, String text) {
-        this.chatId = chatId;
-        this.text = text;
-    }
+    public String toJson(ObjectMapper mapper, BotMessageSerializer serializer) {
+        // TODO: move object mapper and module to separate class
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(serializer);
 
-    public long getChatId() {
-        return chatId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BotMessage that = (BotMessage) o;
-        return chatId == that.chatId && Objects.equals(text, that.text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(chatId, text);
-    }
-
-    @Override
-    public String toString() {
-        return "BotMessage{" +
-                "chatId=" + chatId +
-                ", text='" + text + '\'' +
-                '}';
+        mapper.registerModule(module);
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

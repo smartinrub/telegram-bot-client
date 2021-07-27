@@ -1,6 +1,6 @@
 package com.sergiomartinrubio.client;
 
-import com.sergiomartinrubio.http.ClientHttpRequest;
+import com.sergiomartinrubio.http.ClientHttpRequestImpl;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.model.Chat;
@@ -36,7 +36,7 @@ class TelegramBotClientImplTest {
     private ErrorResponseHandler errorResponseHandler;
 
     @Mock
-    private ClientHttpRequest clientHttpRequest;
+    private ClientHttpRequestImpl clientHttpRequestImpl;
 
     @Test
     void shouldSendMessage() {
@@ -51,8 +51,8 @@ class TelegramBotClientImplTest {
         var secondResponseMessage = new Message(secondMessageResult);
         var firstMessage = new BotMessage(CHAT_ID, FIRST_MESSAGE);
         var secondMessage = new BotMessage(CHAT_ID, SECOND_MESSAGE);
-        when(clientHttpRequest.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
-        when(clientHttpRequest.execute(path, method, secondMessage)).thenReturn(secondResponseMessage);
+        when(clientHttpRequestImpl.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
+        when(clientHttpRequestImpl.execute(path, method, secondMessage)).thenReturn(secondResponseMessage);
 
         // WHEN
         Response firstResponse = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);
@@ -70,7 +70,7 @@ class TelegramBotClientImplTest {
         HttpMethod method = HttpMethod.POST;
         var firstResponseMessage = new ErrorResponse();
         var firstMessage = new BotMessage(CHAT_ID, FIRST_MESSAGE);
-        when(clientHttpRequest.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
+        when(clientHttpRequestImpl.execute(path, method, firstMessage)).thenReturn(firstResponseMessage);
 
         // WHEN
         Response firstResponse = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);

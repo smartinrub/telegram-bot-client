@@ -1,5 +1,6 @@
 package com.sergiomartinrubio.http;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
 import com.sergiomartinrubio.model.Chat;
@@ -25,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ClientHttpRequestTest {
+class ClientHttpRequestImplTest {
     private static final long USER_ID = 1881024015L;
     private static final long CHAT_ID = -489903905L;
     private static final int FIRST_MESSAGE_ID = 9;
@@ -35,11 +36,11 @@ class ClientHttpRequestTest {
     @Mock
     private HttpClient httpClient;
 
-    private ClientHttpRequest clientHttpRequest;
+    private ClientHttpRequestImpl clientHttpRequestImpl;
 
     @BeforeEach
     void setup() {
-        clientHttpRequest = new ClientHttpRequest(httpClient, BASE_URL);
+        clientHttpRequestImpl = new ClientHttpRequestImpl(httpClient, BASE_URL, new ObjectMapper());
     }
 
     @Test
@@ -57,7 +58,7 @@ class ClientHttpRequestTest {
         when(httpClient.send(request, HttpResponse.BodyHandlers.ofString())).thenReturn(new CustomHttpResponse());
 
         // WHEN
-        Response result = clientHttpRequest.execute("/sendMessage", HttpMethod.POST, botMessage);
+        Response result = clientHttpRequestImpl.execute("/sendMessage", HttpMethod.POST, botMessage);
 
         // THEN
         assertThat(result).isEqualTo(responseMessage);
