@@ -22,7 +22,7 @@ public class ClientHttpRequestImpl implements ClientHttpRequest {
 
     @Override
     public Response execute(String path, HttpMethod method, BotMessage botMessage) {
-        String jsonRequestBody = botMessage.toJson(mapper, new BotMessageSerializer(BotMessage.class));
+        String jsonRequestBody = botMessage.toJson(mapper);
         HttpRequest request = buildHttpRequest(path, method, jsonRequestBody);
 
         try {
