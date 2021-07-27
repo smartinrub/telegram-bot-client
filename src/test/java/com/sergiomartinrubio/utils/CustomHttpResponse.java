@@ -16,6 +16,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class CustomHttpResponse implements HttpResponse<String> {
 
+    private final String file;
+
+    public CustomHttpResponse(String file) {
+        this.file = file;
+    }
+
     @Override
     public int statusCode() {
         return 0;
@@ -39,7 +45,7 @@ public class CustomHttpResponse implements HttpResponse<String> {
     @SneakyThrows
     @Override
     public String body() {
-        return Files.readString(Path.of("src/test/resources/json/successfulBotMessageResponse.json"), UTF_8);
+        return Files.readString(Path.of("src/test/resources/json/" + file), UTF_8);
     }
 
     @Override

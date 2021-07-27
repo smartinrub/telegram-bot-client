@@ -6,4 +6,6 @@ import com.sergiomartinrubio.model.Response;
 
 public interface ClientHttpRequest {
     Response execute(String path, HttpMethod method, BotMessage botMessage);
+
+    Response execute(String path, HttpMethod method);
 }

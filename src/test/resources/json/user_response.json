@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "result": {
+    "id": 1881024015,
+    "is_bot": true,
+    "first_name": "java",
+    "username": "cool_java_bot",
+    "can_join_groups": true,
+    "can_read_all_group_messages": false,
+    "supports_inline_queries": false
+  }
+}

@@ -20,4 +20,6 @@ public interface TelegramBotClient {
      * @return message response if successful
      */
     Response sendMessage(long chatId, String message);
+
+    Response getMe();
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "ok")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Message.class, name = "true"),
+        @JsonSubTypes.Type(value = SuccessfulResponse.class, name = "true"),
         @JsonSubTypes.Type(value = ErrorResponse.class, name = "false")
 })
 public class Response {

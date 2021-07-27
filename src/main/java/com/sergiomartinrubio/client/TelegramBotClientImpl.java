@@ -6,6 +6,9 @@ import com.sergiomartinrubio.model.ErrorResponse;
 import com.sergiomartinrubio.model.Response;
 import lombok.RequiredArgsConstructor;
 
+import static com.sergiomartinrubio.client.utils.Methods.GET_ME;
+import static com.sergiomartinrubio.client.utils.Methods.SEND_MESSAGE;
+import static com.sergiomartinrubio.http.model.HttpMethod.GET;
 import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 
 @RequiredArgsConstructor
@@ -16,10 +19,18 @@ class TelegramBotClientImpl implements TelegramBotClient {
 
     @Override
     public Response sendMessage(long chatId, String message) {
-        String path = "/sendMessage";
-        Response response = clientHttpRequestImpl.execute(path, POST, new BotMessage(chatId, message));
+        Response response = clientHttpRequestImpl.execute(SEND_MESSAGE, POST, new BotMessage(chatId, message));
         if (response instanceof ErrorResponse) {
-            errorResponseHandler.handle(response, path);
+            errorResponseHandler.handle(response, SEND_MESSAGE);
+        }
+        return response;
+    }
+
+    @Override
+    public Response getMe() {
+        Response response = clientHttpRequestImpl.execute(GET_ME, GET);
+        if (response instanceof ErrorResponse) {
+            errorResponseHandler.handle(response, GET_ME);
         }
         return response;
     }

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BotMessageSerializerTest {
+class BotSuccessfulResponseSerializerTest {
 
     @Test
     void shouldSerializeBotMessage() throws IOException {
