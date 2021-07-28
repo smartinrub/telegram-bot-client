@@ -3,12 +3,14 @@ package com.sergiomartinrubio.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@EqualsAndHashCode(callSuper = true)
+public class User extends Result {
     private long id;
 
     @JsonProperty("is_bot")
@@ -18,4 +20,13 @@ public class User {
     private String firstName;
 
     private String username;
+
+    @JsonProperty("can_join_groups")
+    private boolean canJoinGroups;
+
+    @JsonProperty("can_read_all_group_messages")
+    private boolean canReadAllGroupMessages;
+
+    @JsonProperty("supports_inline_queries")
+    private boolean supportsInlineQueries;
 }

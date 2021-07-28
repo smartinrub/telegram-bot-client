@@ -1,24 +1,11 @@
 package com.sergiomartinrubio.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = Message.class)
-@JsonSubTypes({@JsonSubTypes.Type(UserResponse.class)})
+@JsonSubTypes({@JsonSubTypes.Type(User.class)})
 public class Result {
-
-    @JsonProperty("message_id")
-    private long messageId;
-
-    private User from;
-    private Chat chat;
-    private long date;
-    private String text;
 }

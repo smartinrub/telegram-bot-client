@@ -7,8 +7,8 @@ import com.sergiomartinrubio.model.ChatType;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
 import com.sergiomartinrubio.model.SuccessfulResponse;
+import com.sergiomartinrubio.model.From;
 import com.sergiomartinrubio.model.User;
-import com.sergiomartinrubio.model.UserResponse;
 import com.sergiomartinrubio.utils.CustomHttpResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ class ClientHttpRequestImplTest {
     @Test
     void shouldExecuteRequest() throws IOException, InterruptedException {
         // GIVEN
-        User from = new User(USER_ID, true, FIRST_NAME, USERNAME);
+        From from = new From(USER_ID, true, FIRST_NAME, USERNAME);
         Chat chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
         var message = new Message(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
         var response = new SuccessfulResponse(message);
@@ -75,7 +75,7 @@ class ClientHttpRequestImplTest {
     @Test
     void shouldExecuteWithoutBody() throws IOException, InterruptedException {
         // GIVEN
-        var user = new UserResponse(USER_ID, true, FIRST_NAME, USERNAME, true, false, false);
+        var user = new User(USER_ID, true, FIRST_NAME, USERNAME, true, false, false);
         var response = new SuccessfulResponse(user);
         HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + GET_ME))
                 .GET()

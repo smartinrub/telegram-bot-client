@@ -1,9 +1,13 @@
 package com.sergiomartinrubio.client;
 
+import com.sergiomartinrubio.exception.TelegramException;
 import com.sergiomartinrubio.http.ClientHttpRequest;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.model.ErrorResponse;
+import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
+import com.sergiomartinrubio.model.SuccessfulResponse;
+import com.sergiomartinrubio.model.User;
 import lombok.RequiredArgsConstructor;
 
 import static com.sergiomartinrubio.client.utils.Methods.GET_ME;
@@ -15,23 +19,30 @@ import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 class TelegramBotClientImpl implements TelegramBotClient {
 
     private final ClientHttpRequest clientHttpRequestImpl;
-    private final ErrorResponseHandler errorResponseHandler;
 
     @Override
-    public Response sendMessage(long chatId, String message) {
+    public Message sendMessage(long chatId, String message) {
         Response response = clientHttpRequestImpl.execute(SEND_MESSAGE, POST, new BotMessage(chatId, message));
+
         if (response instanceof ErrorResponse) {
-            errorResponseHandler.handle(response, SEND_MESSAGE);
+            ErrorResponse errorResponse = (ErrorResponse) response;
+            throw new TelegramException(errorResponse.getErrorCode(), errorResponse.getDescription(), SEND_MESSAGE);
         }
-        return response;
+
+        SuccessfulResponse successfulResponse = (SuccessfulResponse) response;
+        return (Message) successfulResponse.getResult();
     }
 
     @Override
-    public Response getMe() {
+    public User getMe() {
         Response response = clientHttpRequestImpl.execute(GET_ME, GET);
+
         if (response instanceof ErrorResponse) {
-            errorResponseHandler.handle(response, GET_ME);
+            ErrorResponse errorResponse = (ErrorResponse) response;
+            throw new TelegramException(errorResponse.getErrorCode(), errorResponse.getDescription(), GET_ME);
         }
-        return response;
+
+        SuccessfulResponse successfulResponse = (SuccessfulResponse) response;
+        return (User) successfulResponse.getResult();
     }
 }

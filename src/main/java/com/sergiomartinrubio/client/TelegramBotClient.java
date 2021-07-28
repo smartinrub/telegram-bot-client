@@ -1,6 +1,8 @@
 package com.sergiomartinrubio.client;
 
+import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
+import com.sergiomartinrubio.model.User;
 
 /**
  * Client for interacting with Telegram Bots.
@@ -19,7 +21,15 @@ public interface TelegramBotClient {
      * @param message the message as {@link String}
      * @return message response if successful
      */
-    Response sendMessage(long chatId, String message);
+    Message sendMessage(long chatId, String message);
 
-    Response getMe();
+    /**
+     * Returns basic information about the bot
+     *
+     * @see <a href="https://core.telegram.org/bots/api#getme">Telegram GetMe Doc</a>
+     * @see <a href="https://core.telegram.org/bots/api#user">Telegram Returned User Doc</a>
+     *
+     * @return the bot in form of a {@link User}
+     */
+    User getMe();
 }

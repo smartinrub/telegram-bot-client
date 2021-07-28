@@ -14,7 +14,7 @@ public class Message extends Result {
     @JsonProperty("message_id")
     private long messageId;
 
-    private User from;
+    private From from;
     private Chat chat;
     private long date;
     private String text;

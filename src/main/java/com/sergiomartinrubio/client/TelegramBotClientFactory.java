@@ -18,6 +18,6 @@ public class TelegramBotClientFactory {
      * @return the {@link TelegramBotClient}
      */
     public static TelegramBotClient createClient(String botToken) {
-        return new TelegramBotClientImpl(ClientHttpRequestFactory.create(botToken), new ErrorResponseHandler());
+        return new TelegramBotClientImpl(ClientHttpRequestFactory.create(botToken));
     }
 }
