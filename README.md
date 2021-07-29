@@ -9,7 +9,7 @@ Copy and paste the following Maven dependency to your `pom.xml` file.
 <dependency>
     <groupId>com.sergiomartinrubio</groupId>
     <artifactId>telegram-bot-client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
