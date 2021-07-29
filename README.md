@@ -3,7 +3,8 @@
 
 ## Installation
 
-Copy and paste the following Maven dependency to your `pom.xml` file.
+Copy and paste the [telegram-bot-client](https://search.maven.org/artifact/com.sergiomartinrubio/telegram-bot-client/0.0.3/jar)
+Maven dependency to your `pom.xml` file.
 
 ```xml
 <dependency>
@@ -59,3 +60,13 @@ To run tests, run the following command
 ```bash
   mvn clean test
 ```
+
+## Contributing
+
+Anyone is encouraged to contribute to the repository 
+by [forking](https://docs.github.com/en/get-started/quickstart/fork-a-repo) and 
+submitting a pull request. (If you are new to GitHub, you might start 
+with a [basic tutorial](https://docs.github.com/en/get-started/quickstart/set-up-git). By contributing to this project, you grant a 
+world-wide, royalty-free, perpetual, irrevocable, non-exclusive, 
+transferable license to all users under the terms of the [Apache 
+Software License v2](http://www.apache.org/licenses/LICENSE-2.0.html) or later.
