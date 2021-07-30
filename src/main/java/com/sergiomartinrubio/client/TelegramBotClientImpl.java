@@ -1,7 +1,7 @@
 package com.sergiomartinrubio.client;
 
 import com.sergiomartinrubio.exception.TelegramException;
-import com.sergiomartinrubio.http.ClientHttpRequest;
+import com.sergiomartinrubio.http.HttpRequestClient;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.ForwardMessage;
 import com.sergiomartinrubio.model.ErrorResponse;
@@ -20,7 +20,7 @@ import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 @RequiredArgsConstructor
 class TelegramBotClientImpl implements TelegramBotClient {
 
-    private final ClientHttpRequest clientHttpRequestImpl;
+    private final HttpRequestClient httpRequestClientImpl;
 
     @Override
     public Message sendMessage(long chatId, String message) {
@@ -28,7 +28,7 @@ class TelegramBotClientImpl implements TelegramBotClient {
                 .chatId(chatId)
                 .text(message)
                 .build();
-        Response response = clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, botMessage);
+        Response response = httpRequestClientImpl.execute(SEND_MESSAGE_PATH, POST, botMessage);
 
         if (response instanceof ErrorResponse) {
             var errorResponse = (ErrorResponse) response;
@@ -41,7 +41,7 @@ class TelegramBotClientImpl implements TelegramBotClient {
 
     @Override
     public User getMe() {
-        Response response = clientHttpRequestImpl.execute(GET_ME_PATH, GET);
+        Response response = httpRequestClientImpl.execute(GET_ME_PATH, GET);
 
         if (response instanceof ErrorResponse) {
             var errorResponse = (ErrorResponse) response;
@@ -59,7 +59,7 @@ class TelegramBotClientImpl implements TelegramBotClient {
                 .fromChatId(fromChatId)
                 .messageId(messageId)
                 .build();
-        Response response = clientHttpRequestImpl.execute(FORWARD_MESSAGE_PATH, GET, forwardMessage);
+        Response response = httpRequestClientImpl.execute(FORWARD_MESSAGE_PATH, GET, forwardMessage);
 
         if (response instanceof ErrorResponse) {
             var errorResponse = (ErrorResponse) response;

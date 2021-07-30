@@ -17,7 +17,7 @@ import static java.net.http.HttpRequest.BodyPublishers;
 import static java.net.http.HttpRequest.newBuilder;
 
 @RequiredArgsConstructor
-public class ClientHttpRequestImpl implements ClientHttpRequest {
+public class HttpRequestClientImpl implements HttpRequestClient {
     private static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
 
     private final HttpClient httpClient;

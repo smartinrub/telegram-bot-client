@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ClientHttpRequestImplTest {
+class HttpRequestClientImplTest {
     private static final long USER_ID = 1881024015L;
     private static final long CHAT_ID = -489903905L;
     private static final int FIRST_MESSAGE_ID = 9;
@@ -42,11 +42,11 @@ class ClientHttpRequestImplTest {
     @Mock
     private HttpClient httpClient;
 
-    private ClientHttpRequestImpl clientHttpRequestImpl;
+    private HttpRequestClientImpl httpRequestClient;
 
     @BeforeEach
     void setup() {
-        clientHttpRequestImpl = new ClientHttpRequestImpl(httpClient, BASE_URL, new ObjectMapper());
+        httpRequestClient = new HttpRequestClientImpl(httpClient, BASE_URL, new ObjectMapper());
     }
 
     @Test
@@ -69,7 +69,7 @@ class ClientHttpRequestImplTest {
         when(httpClient.send(request, HttpResponse.BodyHandlers.ofString())).thenReturn(new CustomHttpResponse(file));
 
         // WHEN
-        Response result = clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, botMessage);
+        Response result = httpRequestClient.execute(SEND_MESSAGE_PATH, POST, botMessage);
 
         // THEN
         assertThat(result).isEqualTo(response);
@@ -88,7 +88,7 @@ class ClientHttpRequestImplTest {
         when(httpClient.send(request, HttpResponse.BodyHandlers.ofString())).thenReturn(new CustomHttpResponse(file));
 
         // WHEN
-        Response result = clientHttpRequestImpl.execute(GET_ME_PATH, GET);
+        Response result = httpRequestClient.execute(GET_ME_PATH, GET);
 
         // THEN
         assertThat(result).isEqualTo(response);

@@ -1,7 +1,7 @@
 package com.sergiomartinrubio.client;
 
 import com.sergiomartinrubio.exception.TelegramException;
-import com.sergiomartinrubio.http.ClientHttpRequestImpl;
+import com.sergiomartinrubio.http.HttpRequestClientImpl;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.ForwardMessage;
 import com.sergiomartinrubio.model.Chat;
@@ -42,7 +42,7 @@ class TelegramBotClientImplTest {
     private TelegramBotClientImpl telegramBotClientImpl;
 
     @Mock
-    private ClientHttpRequestImpl clientHttpRequestImpl;
+    private HttpRequestClientImpl httpRequestClient;
 
     @Test
     void shouldSendMessage() {
@@ -61,8 +61,8 @@ class TelegramBotClientImplTest {
                 .chatId(CHAT_ID)
                 .text(SECOND_MESSAGE)
                 .build();
-        when(clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, firstMessage)).thenReturn(firstResponseMessage);
-        when(clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, secondMessage)).thenReturn(secondResponseMessage);
+        when(httpRequestClient.execute(SEND_MESSAGE_PATH, POST, firstMessage)).thenReturn(firstResponseMessage);
+        when(httpRequestClient.execute(SEND_MESSAGE_PATH, POST, secondMessage)).thenReturn(secondResponseMessage);
 
         // WHEN
         Message firstResult = telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE);
@@ -81,7 +81,7 @@ class TelegramBotClientImplTest {
                 .chatId(CHAT_ID)
                 .text(FIRST_MESSAGE)
                 .build();
-        when(clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, message)).thenReturn(responseMessage);
+        when(httpRequestClient.execute(SEND_MESSAGE_PATH, POST, message)).thenReturn(responseMessage);
 
         // WHEN
         assertThatThrownBy(() -> telegramBotClientImpl.sendMessage(CHAT_ID, FIRST_MESSAGE))
@@ -93,7 +93,7 @@ class TelegramBotClientImplTest {
         // GIVEN
         User user = new User(USER_ID, true, FIRST_NAME, USERNAME, true, true, false);
         SuccessfulResponse response = new SuccessfulResponse(user);
-        when(clientHttpRequestImpl.execute(GET_ME_PATH, GET)).thenReturn(response);
+        when(httpRequestClient.execute(GET_ME_PATH, GET)).thenReturn(response);
 
         // WHEN
         User result = telegramBotClientImpl.getMe();
@@ -114,7 +114,7 @@ class TelegramBotClientImplTest {
                 .fromChatId(FROM_CHAT_ID)
                 .messageId(FIRST_MESSAGE_ID)
                 .build();
-        when(clientHttpRequestImpl.execute(FORWARD_MESSAGE_PATH, GET, forwardMessage)).thenReturn(response);
+        when(httpRequestClient.execute(FORWARD_MESSAGE_PATH, GET, forwardMessage)).thenReturn(response);
 
         // WHEN
         Message result = telegramBotClientImpl.forwardMessage(CHAT_ID, FROM_CHAT_ID, FIRST_MESSAGE_ID);

@@ -1,6 +1,6 @@
 package com.sergiomartinrubio.client;
 
-import com.sergiomartinrubio.http.ClientHttpRequestFactory;
+import com.sergiomartinrubio.http.HttpRequestClientFactory;
 import lombok.NoArgsConstructor;
 
 /**
@@ -18,6 +18,6 @@ public class TelegramBotClientFactory {
      * @return the {@link TelegramBotClient}
      */
     public static TelegramBotClient createClient(String botToken) {
-        return new TelegramBotClientImpl(ClientHttpRequestFactory.create(botToken));
+        return new TelegramBotClientImpl(HttpRequestClientFactory.create(botToken));
     }
 }
