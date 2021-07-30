@@ -6,6 +6,8 @@ import com.sergiomartinrubio.model.Response;
 
 /**
  * Client for executing HTTP requests
+ *
+ * @author Sergio Martin Rubio
  */
 public interface HttpRequestClient {
     /**

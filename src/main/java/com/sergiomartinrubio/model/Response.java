@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * This class represents the base class for any response returned by the Telegram API
+ *
+ * @author Sergio Martin Rubio
  */
 @Data
 @NoArgsConstructor

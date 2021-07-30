@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * This class is used as a parent class for building a successful response
+ *
+ * @author Sergio Martin Rubio
  */
 @Data
 @NoArgsConstructor
