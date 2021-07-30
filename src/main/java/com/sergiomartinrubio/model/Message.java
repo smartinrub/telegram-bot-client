@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 
+/**
+ * This class represents a message returned by the Telegram API
+ *
+ * @author Sergio Martin Rubio
+ * @see <a href="https://core.telegram.org/bots/api#message">Telegram Returned Message Doc</a>
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

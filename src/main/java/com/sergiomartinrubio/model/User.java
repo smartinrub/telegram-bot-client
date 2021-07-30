@@ -11,6 +11,12 @@ import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * This class represents a user (bot) returned by the Telegram API
+ *
+ * @author Sergio Martin Rubio
+ * @see <a href="https://core.telegram.org/bots/api#user">Telegram Returned User Doc</a>
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
