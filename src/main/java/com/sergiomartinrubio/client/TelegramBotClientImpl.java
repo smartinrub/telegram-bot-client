@@ -17,6 +17,11 @@ import static com.sergiomartinrubio.client.utils.Methods.SEND_MESSAGE_PATH;
 import static com.sergiomartinrubio.http.model.HttpMethod.GET;
 import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 
+/**
+ * Implementation of {@link TelegramBotClient}.
+ *
+ * @author Sergio Martin Rubio
+ */
 @RequiredArgsConstructor
 class TelegramBotClientImpl implements TelegramBotClient {
 

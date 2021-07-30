@@ -11,7 +11,7 @@ import com.sergiomartinrubio.model.User;
 public interface TelegramBotClient {
 
     /**
-     * Sends a message to a particular chat
+     * Sends a message to a particular chat.
      *
      * @param chatId  the target chat for the bot message
      * @param message the message as {@link String}
@@ -21,7 +21,7 @@ public interface TelegramBotClient {
     Message sendMessage(long chatId, String message);
 
     /**
-     * Returns basic information about the bot
+     * Returns basic information about the bot.
      *
      * @return the bot in form of a {@link User}
      * @see <a href="https://core.telegram.org/bots/api#getme">Telegram GetMe Doc</a>
@@ -29,7 +29,7 @@ public interface TelegramBotClient {
     User getMe();
 
     /**
-     * Forwards message from one chat to another
+     * Forwards message from one chat to another.
      *
      * @param chatId     the destination chat for the message to be forwarded
      * @param fromChatId the source chat where the message to be forwarded resides

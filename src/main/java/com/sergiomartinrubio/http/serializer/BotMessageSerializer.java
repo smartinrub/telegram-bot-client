@@ -7,6 +7,11 @@ import com.sergiomartinrubio.http.model.BotMessage;
 
 import java.io.IOException;
 
+/**
+ * Serializer for converting a {@link BotMessage} to JSON.
+ *
+ * @author Sergio Martin Rubio
+ */
 public class BotMessageSerializer extends JsonSerializer<BotMessage> {
 
     @Override

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * This class is used as a parent class for building a successful response
+ * This class is used as a parent class for building a successful response.
  *
  * @author Sergio Martin Rubio
  */
@@ -15,5 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SuccessfulResponse extends Response {
+    /**
+     * Contains information about a successful response.
+     */
     private Result result;
 }

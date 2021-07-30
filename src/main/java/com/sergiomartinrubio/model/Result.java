@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Marker interface for creating a result depending on the {@link Response}
+ * Marker interface for creating a result depending on the {@link Response}.
  *
  * @author Sergio Martin Rubio
  */

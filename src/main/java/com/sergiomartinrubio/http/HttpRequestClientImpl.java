@@ -16,6 +16,11 @@ import static java.net.http.HttpRequest.BodyPublisher;
 import static java.net.http.HttpRequest.BodyPublishers;
 import static java.net.http.HttpRequest.newBuilder;
 
+/**
+ * Implementation of {@link HttpRequestClient}.
+ *
+ * @author Sergio Martin Rubio
+ */
 @RequiredArgsConstructor
 public class HttpRequestClientImpl implements HttpRequestClient {
     private static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";

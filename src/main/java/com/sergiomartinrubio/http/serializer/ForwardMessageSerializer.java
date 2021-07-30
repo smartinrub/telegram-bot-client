@@ -7,6 +7,11 @@ import com.sergiomartinrubio.http.model.ForwardMessage;
 
 import java.io.IOException;
 
+/**
+ * Serializer for converting a {@link ForwardMessage} to JSON.
+ *
+ * @author Sergio Martin Rubio
+ */
 public class ForwardMessageSerializer extends JsonSerializer<ForwardMessage> {
     @Override
     public void serialize(ForwardMessage message, JsonGenerator jsonGenerator, SerializerProvider serializers)
