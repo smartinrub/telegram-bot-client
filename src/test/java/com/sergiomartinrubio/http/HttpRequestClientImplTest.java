@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.model.Chat;
 import com.sergiomartinrubio.model.ChatType;
-import com.sergiomartinrubio.model.From;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
 import com.sergiomartinrubio.model.SuccessfulResponse;
@@ -52,9 +51,9 @@ class HttpRequestClientImplTest {
     @Test
     void shouldExecuteRequest() throws IOException, InterruptedException {
         // GIVEN
-        From from = new From(USER_ID, true, FIRST_NAME, USERNAME);
+        User from = new User(USER_ID, true, FIRST_NAME, USERNAME, null, null, null);
         Chat chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
-        var message = new Message(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
+        var message = new Message(FIRST_MESSAGE_ID, from, 1626859986L, chat, null, null, FIRST_MESSAGE);
         var response = new SuccessfulResponse(message);
         BotMessage botMessage = BotMessage.builder()
                 .chatId(CHAT_ID)

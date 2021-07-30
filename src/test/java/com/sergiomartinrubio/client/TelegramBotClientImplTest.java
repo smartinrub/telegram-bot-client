@@ -7,7 +7,6 @@ import com.sergiomartinrubio.http.model.ForwardMessage;
 import com.sergiomartinrubio.model.Chat;
 import com.sergiomartinrubio.model.ChatType;
 import com.sergiomartinrubio.model.ErrorResponse;
-import com.sergiomartinrubio.model.From;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.SuccessfulResponse;
 import com.sergiomartinrubio.model.User;
@@ -47,10 +46,10 @@ class TelegramBotClientImplTest {
     @Test
     void shouldSendMessage() {
         // GIVEN
-        From from = new From(USER_ID, true, FIRST_NAME, USERNAME);
+        User from = new User(USER_ID, true, FIRST_NAME, USERNAME, null, null, null);
         Chat chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
-        var firstMessageResult = new Message(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
-        var secondMessageResult = new Message(SECOND_MESSAGE_ID, from, chat, 1626859987L, SECOND_MESSAGE);
+        var firstMessageResult = new Message(FIRST_MESSAGE_ID, from, 1626859986L, chat, null, null, FIRST_MESSAGE);
+        var secondMessageResult = new Message(SECOND_MESSAGE_ID, from, 1626859987L, chat, null, null, SECOND_MESSAGE);
         var firstResponseMessage = new SuccessfulResponse(firstMessageResult);
         var secondResponseMessage = new SuccessfulResponse(secondMessageResult);
         var firstMessage = BotMessage.builder()
@@ -105,9 +104,9 @@ class TelegramBotClientImplTest {
     @Test
     void shouldForwardMessage() {
         // GIVEN
-        var from = new From(USER_ID, true, FIRST_NAME, USERNAME);
+        User from = new User(USER_ID, true, FIRST_NAME, USERNAME, null, null, null);
         var chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
-        var message = new Message(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
+        var message = new Message(FIRST_MESSAGE_ID, from, 1626859986L, chat, null, null, FIRST_MESSAGE);
         var response = new SuccessfulResponse(message);
         ForwardMessage forwardMessage = ForwardMessage.builder()
                 .chatId(CHAT_ID)

@@ -1,20 +1,26 @@
 package com.sergiomartinrubio.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true)
 public class User extends Result {
     private long id;
 
     @JsonProperty("is_bot")
-    private boolean isBot;
+    private Boolean isBot;
 
     @JsonProperty("first_name")
     private String firstName;
@@ -22,11 +28,23 @@ public class User extends Result {
     private String username;
 
     @JsonProperty("can_join_groups")
-    private boolean canJoinGroups;
+    private Boolean canJoinGroups;
 
     @JsonProperty("can_read_all_group_messages")
-    private boolean canReadAllGroupMessages;
+    private Boolean canReadAllGroupMessages;
 
     @JsonProperty("supports_inline_queries")
-    private boolean supportsInlineQueries;
+    private Boolean supportsInlineQueries;
+
+    public Optional<Boolean> getCanJoinGroups() {
+        return Optional.ofNullable(canJoinGroups);
+    }
+
+    public Optional<Boolean> getCanReadAllGroupMessages() {
+        return Optional.ofNullable(canReadAllGroupMessages);
+    }
+
+    public Optional<Boolean> getSupportsInlineQueries() {
+        return Optional.ofNullable(supportsInlineQueries);
+    }
 }
