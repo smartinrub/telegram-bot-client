@@ -30,10 +30,7 @@ class TelegramBotClientImpl implements TelegramBotClient {
                 .build();
         Response response = httpRequestClientImpl.execute(SEND_MESSAGE_PATH, POST, botMessage);
 
-        if (response instanceof ErrorResponse) {
-            var errorResponse = (ErrorResponse) response;
-            throw new TelegramException(errorResponse.getErrorCode(), errorResponse.getDescription(), SEND_MESSAGE_PATH);
-        }
+        validateResponse(response, SEND_MESSAGE_PATH);
 
         var successfulResponse = (SuccessfulResponse) response;
         return (Message) successfulResponse.getResult();
@@ -43,10 +40,7 @@ class TelegramBotClientImpl implements TelegramBotClient {
     public User getMe() {
         Response response = httpRequestClientImpl.execute(GET_ME_PATH, GET);
 
-        if (response instanceof ErrorResponse) {
-            var errorResponse = (ErrorResponse) response;
-            throw new TelegramException(errorResponse.getErrorCode(), errorResponse.getDescription(), GET_ME_PATH);
-        }
+        validateResponse(response, GET_ME_PATH);
 
         var successfulResponse = (SuccessfulResponse) response;
         return (User) successfulResponse.getResult();
@@ -61,16 +55,20 @@ class TelegramBotClientImpl implements TelegramBotClient {
                 .build();
         Response response = httpRequestClientImpl.execute(FORWARD_MESSAGE_PATH, GET, forwardMessage);
 
+        validateResponse(response, FORWARD_MESSAGE_PATH);
+
+        var successfulResponse = (SuccessfulResponse) response;
+        return (Message) successfulResponse.getResult();
+    }
+
+    private void validateResponse(Response response, String path) {
         if (response instanceof ErrorResponse) {
             var errorResponse = (ErrorResponse) response;
             throw new TelegramException(
                     errorResponse.getErrorCode(),
                     errorResponse.getDescription(),
-                    FORWARD_MESSAGE_PATH
+                    path
             );
         }
-
-        var successfulResponse = (SuccessfulResponse) response;
-        return (Message) successfulResponse.getResult();
     }
 }
