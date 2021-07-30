@@ -6,7 +6,7 @@
 
     <groupId>com.sergiomartinrubio</groupId>
     <artifactId>telegram-bot-client</artifactId>
-    <version>0.0.4</version>
+    <version>0.1.0</version>
 
     <name>telegram-bot-client</name>
     <description>Client library for interacting with Telegram Bots</description>

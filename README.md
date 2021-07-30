@@ -3,7 +3,7 @@
 ## Installation
 
 Copy and paste
-the [telegram-bot-client](https://search.maven.org/artifact/com.sergiomartinrubio/telegram-bot-client/0.0.3/jar)
+the [telegram-bot-client](https://search.maven.org/artifact/com.sergiomartinrubio/telegram-bot-client)
 Maven dependency to your `pom.xml` file.
 
 ```xml
@@ -11,7 +11,7 @@ Maven dependency to your `pom.xml` file.
 <dependency>
     <groupId>com.sergiomartinrubio</groupId>
     <artifactId>telegram-bot-client</artifactId>
-    <version>0.0.3</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
