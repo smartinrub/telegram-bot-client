@@ -1,8 +1,8 @@
 package com.sergiomartinrubio.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.http.model.HttpMethod;
+import com.sergiomartinrubio.http.model.RequestBody;
 import com.sergiomartinrubio.model.Response;
 import lombok.RequiredArgsConstructor;
 
@@ -25,8 +25,8 @@ public class ClientHttpRequestImpl implements ClientHttpRequest {
     private final ObjectMapper mapper;
 
     @Override
-    public Response execute(String path, HttpMethod method, BotMessage botMessage) {
-        String jsonRequestBody = botMessage.toJson(mapper);
+    public Response execute(String path, HttpMethod method, RequestBody requestBody) {
+        String jsonRequestBody = requestBody.toJson(mapper);
         HttpRequest request = getHttpRequest(path, method, jsonRequestBody);
         return send(request);
     }

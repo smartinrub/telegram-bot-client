@@ -13,10 +13,14 @@ class BotSuccessfulResponseSerializerTest {
     @Test
     void shouldSerializeBotMessage() throws IOException {
         // GIVEN
-        ObjectMapper mapper = new ObjectMapper();
+        var mapper = new ObjectMapper();
+        var botMessage = BotMessage.builder()
+                .chatId(1234)
+                .text("hello")
+                .build();
 
         // WHEN
-        String result = mapper.writeValueAsString(new BotMessage(1234, "hello"));
+        String result = mapper.writeValueAsString(botMessage);
 
         // THEN
         assertThat(result).isEqualTo("{\"chat_id\":1234,\"text\":\"hello\"}");

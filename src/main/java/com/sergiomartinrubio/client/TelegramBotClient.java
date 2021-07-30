@@ -32,4 +32,6 @@ public interface TelegramBotClient {
      * @return the bot in form of a {@link User}
      */
     User getMe();
+
+    Message forwardMessage(long chatId, long fromChatId, long messageId);
 }

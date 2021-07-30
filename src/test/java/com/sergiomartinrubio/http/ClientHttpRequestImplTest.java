@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiomartinrubio.http.model.BotMessage;
 import com.sergiomartinrubio.model.Chat;
 import com.sergiomartinrubio.model.ChatType;
+import com.sergiomartinrubio.model.From;
 import com.sergiomartinrubio.model.Message;
 import com.sergiomartinrubio.model.Response;
 import com.sergiomartinrubio.model.SuccessfulResponse;
-import com.sergiomartinrubio.model.From;
 import com.sergiomartinrubio.model.User;
 import com.sergiomartinrubio.utils.CustomHttpResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +22,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static com.sergiomartinrubio.client.utils.Methods.GET_ME;
-import static com.sergiomartinrubio.client.utils.Methods.SEND_MESSAGE;
+import static com.sergiomartinrubio.client.utils.Methods.GET_ME_PATH;
+import static com.sergiomartinrubio.client.utils.Methods.SEND_MESSAGE_PATH;
 import static com.sergiomartinrubio.http.model.HttpMethod.GET;
 import static com.sergiomartinrubio.http.model.HttpMethod.POST;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,8 +56,11 @@ class ClientHttpRequestImplTest {
         Chat chat = new Chat(CHAT_ID, "Java", ChatType.GROUP, true);
         var message = new Message(FIRST_MESSAGE_ID, from, chat, 1626859986L, FIRST_MESSAGE);
         var response = new SuccessfulResponse(message);
-        BotMessage botMessage = new BotMessage(CHAT_ID, FIRST_MESSAGE);
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + SEND_MESSAGE))
+        BotMessage botMessage = BotMessage.builder()
+                .chatId(CHAT_ID)
+                .text(FIRST_MESSAGE)
+                .build();
+        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + SEND_MESSAGE_PATH))
                 .header("Content-Type", "application/json")
                 .method(POST.name(), HttpRequest.BodyPublishers
                         .ofString("{\"chat_id\":-489903905,\"text\":\"first message\"}"))
@@ -66,7 +69,7 @@ class ClientHttpRequestImplTest {
         when(httpClient.send(request, HttpResponse.BodyHandlers.ofString())).thenReturn(new CustomHttpResponse(file));
 
         // WHEN
-        Response result = clientHttpRequestImpl.execute(SEND_MESSAGE, POST, botMessage);
+        Response result = clientHttpRequestImpl.execute(SEND_MESSAGE_PATH, POST, botMessage);
 
         // THEN
         assertThat(result).isEqualTo(response);
@@ -77,7 +80,7 @@ class ClientHttpRequestImplTest {
         // GIVEN
         var user = new User(USER_ID, true, FIRST_NAME, USERNAME, true, false, false);
         var response = new SuccessfulResponse(user);
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + GET_ME))
+        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + GET_ME_PATH))
                 .GET()
                 .header("Content-Type", "application/json")
                 .build();
@@ -85,7 +88,7 @@ class ClientHttpRequestImplTest {
         when(httpClient.send(request, HttpResponse.BodyHandlers.ofString())).thenReturn(new CustomHttpResponse(file));
 
         // WHEN
-        Response result = clientHttpRequestImpl.execute(GET_ME, GET);
+        Response result = clientHttpRequestImpl.execute(GET_ME_PATH, GET);
 
         // THEN
         assertThat(result).isEqualTo(response);
