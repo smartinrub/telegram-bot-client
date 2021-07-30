@@ -1,4 +1,4 @@
-package com.sergiomartinrubio.http;
+package com.sergiomartinrubio.http.serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sergiomartinrubio.http.model.BotMessage;

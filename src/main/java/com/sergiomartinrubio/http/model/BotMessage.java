@@ -1,7 +1,7 @@
 package com.sergiomartinrubio.http.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.sergiomartinrubio.http.BotMessageSerializer;
+import com.sergiomartinrubio.http.serializer.BotMessageSerializer;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
