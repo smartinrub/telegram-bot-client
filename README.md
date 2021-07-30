@@ -63,6 +63,10 @@ Message response=telegramBotClient.forwardMessage(<SOURCE_CHAT_ID>,<DESTINATION_
 
 `<SOURCE_CHAT_ID>` and `<DESTINATION_CHAT_ID>` looks like `-489903905L`.
 
+## Documentation
+
+[Documentation](https://www.javadoc.io/doc/com.sergiomartinrubio/telegram-bot-client/latest/index.html)
+
 ## Running Tests
 
 To run tests, run the following command
