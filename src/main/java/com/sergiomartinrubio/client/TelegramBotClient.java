@@ -15,7 +15,7 @@ public interface TelegramBotClient {
      *
      * @param chatId  the target chat for the bot message
      * @param message the message as {@link String}
-     * @return information about the message sent
+     * @return information about the message sent in form of a {@link Message}
      * @see <a href="https://core.telegram.org/bots/api#sendmessage">Telegram SendMessage Doc</a>
      * @see <a href="https://core.telegram.org/bots/api#message">Telegram Returned Message Doc</a>
      */
