@@ -36,7 +36,7 @@ public interface TelegramBotClient {
      * @param chatId     the destination chat for the message to be forwarded
      * @param fromChatId the source chat where the message to be forwarded resides
      * @param messageId  the target message to be forwarded
-     * @return information about the message forwarded
+     * @return information about the message forwarded in form of a {@link Message}
      * @see <a href="https://core.telegram.org/bots/api#forwardmessage">Telegram ForwardMessage Doc</a>
      * @see <a href="https://core.telegram.org/bots/api#message">Telegram Returned Message Doc</a>
      */
