@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class is used as a parent class for building a successful response
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

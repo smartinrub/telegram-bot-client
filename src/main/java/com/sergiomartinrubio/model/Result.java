@@ -2,10 +2,11 @@ package com.sergiomartinrubio.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode
+/**
+ * Marker interface for creating a result depending on the {@link Response}
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = Message.class)
 @JsonSubTypes({@JsonSubTypes.Type(User.class)})
-public class Result {
+public interface Result {
 }

@@ -18,9 +18,8 @@ import java.util.Optional;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Message extends Result {
+public class Message implements Result {
     @JsonProperty("message_id")
     private long messageId;
 

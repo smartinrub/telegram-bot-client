@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents the base class for any response returned by the Telegram API
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +18,11 @@ import lombok.NoArgsConstructor;
         @JsonSubTypes.Type(value = ErrorResponse.class, name = "false")
 })
 public class Response {
+    /**
+     * If 'ok' equals true, the request was successful, {@link SuccessfulResponse} is use as
+     * base class and the result of the query can be found in the {@link Result} field. In
+     * case of an unsuccessful request, 'ok' equals false, {@link ErrorResponse} is use as
+     * base class and the error is explained in the 'description'
+     */
     private boolean ok;
 }

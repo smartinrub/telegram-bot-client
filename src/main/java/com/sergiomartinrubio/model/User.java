@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Optional;
@@ -21,8 +20,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
-@EqualsAndHashCode(callSuper = true)
-public class User extends Result {
+public class User implements Result {
     private long id;
 
     @JsonProperty("is_bot")
