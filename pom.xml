@@ -6,7 +6,7 @@
 
     <groupId>com.sergiomartinrubio</groupId>
     <artifactId>telegram-bot-client</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <name>telegram-bot-client</name>
     <description>Client library for interacting with Telegram Bots</description>
@@ -157,10 +157,6 @@
                     <id>ossrh</id>
                     <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
-<!--                <repository>-->
-<!--                    <id>ossrh</id>-->
-<!--                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-<!--                </repository>-->
             </distributionManagement>
         </profile>
     </profiles>
