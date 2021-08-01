@@ -1,5 +1,7 @@
 # telegram-bot-client
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.sergiomartinrubio/telegram-bot-client.svg)](https://search.maven.org/artifact/com.sergiomartinrubio/telegram-bot-client)
+
 ## Installation
 
 Copy and paste
